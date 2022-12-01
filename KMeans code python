@@ -1,16 +1,15 @@
 #I used KMeans clustering in annual_income and spending_score columns
 
+#import library
 import pandas as pd  
-from sklearn.cluster import KMeans  
+from sklearn.cluster import KMeans
+import matplotlib.pyplot as plt
 
 dataset = pd.read_csv('https://storage.googleapis.com/dqlab-dataset/pythonTutorial/mall_customers.csv')   
 X = dataset[['annual_income','spending_score']]  
 
 cluster_model = KMeans(n_clusters = 5, random_state = 24)  
 labels = cluster_model.fit_predict(X)
-
-#import library
-import matplotlib.pyplot as plt
 
 #convert dataframe to array
 X = X.values
