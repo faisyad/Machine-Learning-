@@ -1,0 +1,46 @@
+#First of all, we need to import iris.csv
+#You can download the dataset from 'https://www.kaggle.com/datasets/uciml/iris'
+import pandas as pd
+data = pd.read_csv("Iris.csv")
+data.drop('Id', axis = 1, inplace = True)
+
+# Import train test split and split iris.csv to data and target. x for data and y for target or label
+from sklearn.model_selection import train_test_split
+x = data[['SepalLengthCm', 'SepalWidthCm', 'PetalLengthCm', 'PetalWidthCm']]
+y = data['Species']
+
+X_train, X_test, y_train, y_test = train_test_split(x, y, test_size = 0.1, random_state=123)
+
+# Import library decision tree classifier
+from sklearn.tree import DecisionTreeClassifier
+tree_model = DecisionTreeClassifier()
+
+# Train model with decision tree
+tree_model = tree_model.fit(X_train, y_train)
+
+# Model Evaluation
+from sklearn.metrics import accuracy_score
+y_pred = tree_model.predict(X_test)
+
+# how to find Accuracy
+acc_score = round(accuracy_score(y_pred, y_test), 3)
+
+print('Accuracy', acc_score)
+
+# After you run the code from line 1 - 28, the result is 0.9333 and the target/label is Iris-Virginica
+
+# Next is predict the model using tree_model.predict([[sepal length, sepal width, petal length, petal width]])
+print(tree_model.predict([[6.2, 3.4, 5.4, 2.3]]))
+
+# Use export_graphviz from sklearn.tree to see decision tree visualization
+from sklearn.tree import export_graphviz
+export_graphviz(
+    tree_model, 
+    out_file = 'iris_tree.dot',
+    feature_names = ['SepalLengthCm', 'SepalWidthCm', 'PetalLengthCm', 'PetalWidthCm'],
+    class_names = ['Iris-Setosa', 'Iris-Versicolor', 'Iris-Virginica'],
+    rounded = True,
+    filled = True
+)
+
+# If you completed the code above, you can export the file to png file
