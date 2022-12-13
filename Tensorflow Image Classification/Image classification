@@ -112,4 +112,4 @@ for fn in uploaded.keys():
 ## ------------ Note ------------ ##
 # If you want better pixel (image resolution),... #
 # make sure you increase the value on target_size and input_shape. ... #
-# I try (300, 300) and it tooks 1 minutes per epoch to run #
+# I try (300, 300) and it takes 1 minutes per epoch to run #
